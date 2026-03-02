@@ -1,7 +1,7 @@
 package com.example.selenium;
 
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
+import static org.testng.Assert.assertEquals;
+import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,12 +10,13 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import java.io.File;
 
 public class AdditionTest {
+
     @Test
     public void testAddition() throws InterruptedException {
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
 
-        // Dynamically resolve path - works on any machine including Jenkins
+        // Dynamically resolve path - works on Jenkins
         File indexFile = new File("src/main/webapp/index.html");
         String filePath = "file:///" + indexFile.getAbsolutePath().replace("\\", "/");
 
@@ -30,7 +31,7 @@ public class AdditionTest {
         Thread.sleep(2000);
 
         String result = driver.findElement(By.id("answer")).getText();
-        assertEquals("Result: 30", result);
+        assertEquals(result, "Result: 30");
         driver.quit();
     }
 }
